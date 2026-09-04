@@ -179,7 +179,6 @@ bash scripts/rl/merge_grpo_checkpoint.sh ./runs/grpo/<run>/checkpoint-100
 ## Notes 📝
 
 - The repo intentionally excludes experimental utilities, visualization scratch scripts, vendored `mmcv`, and local training artifacts.
-- For an architecture summary, see [docs/dual_stream_architecture.md](./docs/dual_stream_architecture.md).
 
 ## License 📄
 
