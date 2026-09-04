@@ -1,0 +1,76 @@
+# Model Configuration
+model:
+  # Path to SFT checkpoint
+  model_path: "./checkpoints/lap_forensic_merged"
+  
+  # CRITICAL: Set to false to freeze SAM mask decoder during RL
+  train_mask_decoder: false
+  
+  # LoRA
+  lora_r: 8
+  lora_alpha: 16
+  lora_dropout: 0.05
+  
+  # Vision
+  vision_tower: "openai/clip-vit-large-patch14-336"
+  vision_pretrained: "./checkpoints/sam_vit_h_4b8939.pth"
+  out_dim: 256
+  model_max_length: 1536
+  
+  # MANDATORY: Dual-Stream Consistency (SFT was trained with this)
+  use_consistency_stream: true
+  vae_path: "stabilityai/sd-vae-ft-mse"
+  consistency_encoder_type: "clip"
+
+# GRPO Algorithm (TRL GRPOConfig)
+grpo:
+  num_generations: 4          # Group size G
+  temperature: 0.8            # Sampling temperature
+  max_new_tokens: 512         # Max generation length
+
+# Reward Configuration
+rewards:
+  mask_reward_weight: 0.7     # IoU-based mask reward
+  format_reward_weight: 0.6   # CoT format compliance
+  iou_bonus_threshold: 0.7
+  iou_bonus_value: 0.5
+
+# Data Configuration
+data:
+  dataset_dir: "./data/SynthScars_CoT"
+  val_dataset_dir: "./data/SynthScars"
+  image_size: 512
+  num_classes_per_sample: 3
+
+# Training Configuration
+training:
+  # Steps
+  num_train_epochs: 3
+  max_steps: -1               # Set to positive value to limit steps
+  
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  
+  # Optimizer
+  learning_rate: 1.0e-5
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  
+  # Logging
+  logging_steps: 5
+  save_steps: 200
+  eval_steps: 1000
+  
+  deepspeed_config: "configs/ds_config_zero2.json"
+  
+  # Other
+  epoch_samples: 8000
+  precision: "bf16"
+  
+  # Optional experiment tracking
+  use_swanlab: false
+  swanlab_project: "LaP-Forensic-GRPO"
+  swanlab_experiment: null
+  
+  # Output
+  output_dir: "./runs/grpo"
