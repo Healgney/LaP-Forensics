@@ -1,13 +1,21 @@
-# LaP-Forensics 🔍
+<div align="center">
 
-Codebase for **LaP-Forensics: Latent-Pixel Consistency Guided Multimodal Reasoning for Deepfake Detection**.
+# LaP-Forensics: Latent-Pixel Consistency Guided Multimodal Reasoning for Deepfake Detection 🔍
+
+[![arXiv](https://img.shields.io/badge/arXiv-2607.25962-b31b1b.svg)](https://arxiv.org/abs/2607.25962)
+
+</div>
 
 LaP-Forensics is an explainable deepfake forensics framework built around two ideas:
 
 - A **dual-stream representation** that fuses RGB semantics with a DDIM-derived **Latent-Pixel Consistency Map**
 - A structured **Where-What-Why** reasoning pipeline aligned with segmentation quality and evidence consistency
 
-The cleaned public repo focuses on the main reproduction path only: supervised fine-tuning, inference, image-level detection, LoRA weight merging, and GRPO-based post-training alignment.
+## What's New 🆕
+
+- **2026-08-31** — Code released ✅
+- **2026-07-28** — arXiv preprint available: [arXiv:2607.25962](https://arxiv.org/abs/2607.25962)
+- **2026-07-27** — Accepted by ACM Multimedia 2026 🎉
 
 ## Method Overview 🏗️
 
@@ -172,13 +180,6 @@ bash scripts/rl/merge_grpo_checkpoint.sh ./runs/grpo/<run>/checkpoint-100
 
 - The repo intentionally excludes experimental utilities, visualization scratch scripts, vendored `mmcv`, and local training artifacts.
 - For an architecture summary, see [docs/dual_stream_architecture.md](./docs/dual_stream_architecture.md).
-
-## Progress 📌
-
-| Date | Milestone |
-| --- | --- |
-| 2026-07-27 | Accepted by ACM Multimedia 2026 🎉 |
-| 2026-08-31 | Code released ✅ |
 
 ## License 📄
 
